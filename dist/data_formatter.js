@@ -95,28 +95,16 @@ System.register(['lodash', './geohash', './china_city_mapping'], function (_expo
           value: function setGeohashValues(dataList, data) {
             var _this2 = this;
 
-            if (!this.ctrl.panel.esGeoPoint || !this.ctrl.panel.esMetric) return;
+            if (!this.ctrl.panel.esMetric) return;
+            if (!this.ctrl.panel.esGeoPoint && !this.ctrl.panel.esLocationName) return;
 
             if (dataList && dataList.length > 0) {
               var highestValue = 0;
               var lowestValue = Number.MAX_VALUE;
               console.info('setGeohashValues...');
               dataList[0].datapoints.forEach(function (datapoint) {
-                var encodedGeohash = datapoint[_this2.ctrl.panel.esGeoPoint];
-                var decodedGeohash = decodeGeoHash(encodedGeohash);
-
-                // const dataValue = {
-                //   key: encodedGeohash,
-                //   locationName: this.ctrl.panel.esLocationName ? datapoint[this.ctrl.panel.esLocationName] : encodedGeohash,
-                //   locationLatitude: decodedGeohash.latitude,
-                //   locationLongitude: decodedGeohash.longitude,
-                //   value: datapoint[this.ctrl.panel.esMetric],
-                //   valueFormatted: datapoint[this.ctrl.panel.esMetric],
-                //   valueRounded: 0
-                // };
-
                 var dataValue = {
-                  name: _this2.ctrl.panel.esLocationName ? py2hz(datapoint[_this2.ctrl.panel.esLocationName]) : encodedGeohash,
+                  name: _this2.ctrl.panel.esLocationName ? py2hz(datapoint[_this2.ctrl.panel.esLocationName]) : datapoint[_this2.ctrl.panel.esGeoPoint],
                   value: datapoint[_this2.ctrl.panel.esMetric]
                 };
 

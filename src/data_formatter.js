@@ -49,28 +49,16 @@ export default class DataFormatter {
   }
 
   setGeohashValues(dataList, data) {
-    if (!this.ctrl.panel.esGeoPoint || !this.ctrl.panel.esMetric) return;
+    if (!this.ctrl.panel.esMetric) return;
+    if (!this.ctrl.panel.esGeoPoint && !this.ctrl.panel.esLocationName) return;
 
     if (dataList && dataList.length > 0) {
       let highestValue = 0;
       let lowestValue = Number.MAX_VALUE;
       console.info('setGeohashValues...');
       dataList[0].datapoints.forEach((datapoint) => {
-        const encodedGeohash = datapoint[this.ctrl.panel.esGeoPoint];
-        const decodedGeohash = decodeGeoHash(encodedGeohash);
-        
-        // const dataValue = {
-        //   key: encodedGeohash,
-        //   locationName: this.ctrl.panel.esLocationName ? datapoint[this.ctrl.panel.esLocationName] : encodedGeohash,
-        //   locationLatitude: decodedGeohash.latitude,
-        //   locationLongitude: decodedGeohash.longitude,
-        //   value: datapoint[this.ctrl.panel.esMetric],
-        //   valueFormatted: datapoint[this.ctrl.panel.esMetric],
-        //   valueRounded: 0
-        // };
-
         const dataValue = {
-          name: this.ctrl.panel.esLocationName ? py2hz(datapoint[this.ctrl.panel.esLocationName]) : encodedGeohash,
+          name: this.ctrl.panel.esLocationName ? py2hz(datapoint[this.ctrl.panel.esLocationName]) : datapoint[this.ctrl.panel.esGeoPoint],
           value: datapoint[this.ctrl.panel.esMetric] 
         };
 

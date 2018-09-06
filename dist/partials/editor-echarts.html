@@ -5,12 +5,12 @@
                 <div class="gf-form">
                     <label class="gf-form-label width-8">Chart Type</label>
                     <div class="gf-form-select-wrapper max-width-15">
-                        <select class="gf-form-input width-8" ng-model="ctrl.panel.type" ng-options="type for type in ctrl.panel.ETYPE" ng-change="ctrl.onDataReceived()"></select>
+                        <select class="gf-form-input width-8" ng-model="ctrl.panel.chartType" ng-options="type for type in ctrl.panel.ETYPE" ng-change="ctrl.onDataReceived()"></select>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="section gf-form-group" ng-show="ctrl.panel.type == 'map'">
+        <div class="section gf-form-group" ng-show="ctrl.panel.chartType == 'map'">
           <h5 class="section-heading">Map Data Options</h5>
             <div class="gf-form">
                 <label class="gf-form-label width-12">ES Metric Field</label>

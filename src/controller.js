@@ -16,10 +16,10 @@ import DataFormatter from './data_formatter';
 export class Controller extends MetricsPanelCtrl {
 
     constructor($scope, $injector) {
-        super($scope, $injector);
+        super($scope, $injector);	
 
         const panelDefaults = {
-            EchartsOption: 'option = {};',
+            EchartsOption: "option = {};",
             IS_UCD: false,
             METHODS: ['POST', 'GET'],
             ETYPE: ['line', 'pie', 'map'],
@@ -46,9 +46,9 @@ export class Controller extends MetricsPanelCtrl {
     onDataReceived(dataList) {
         this.data = this.panel.IS_UCD ? this.customizeData : dataList;
 
-        if (this.panel.type == 'map') {
+        if (this.panel.chartType == 'map') {
             const data  = [];
-            this.dataFormatter.setGeohashValues(dataList, data);
+            this.dataFormatter.setGeohashValues(this.data, data);
             this.data = this.dataFormatter.aggByProvince(data);
         }
 

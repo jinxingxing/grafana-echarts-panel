@@ -1,6 +1,6 @@
 'use strict';
 
-System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', './libs/echarts.min', './libs/dark', './style.css!', './libs/china.js', './data_formatter'], function (_export, _context) {
+System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', './libs/echarts.min', './libs/dark', './style.css!', './libs/china.js', './libs/bmap.js', './libs/getBmap.js', './data_formatter'], function (_export, _context) {
     "use strict";
 
     var MetricsPanelCtrl, _, kbn, echarts, DataFormatter, _createClass, Controller;
@@ -44,7 +44,7 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', './libs/echa
             kbn = _appCoreUtilsKbn.default;
         }, function (_libsEchartsMin) {
             echarts = _libsEchartsMin.default;
-        }, function (_libsDark) {}, function (_styleCss) {}, function (_libsChinaJs) {}, function (_data_formatter) {
+        }, function (_libsDark) {}, function (_styleCss) {}, function (_libsChinaJs) {}, function (_libsBmapJs) {}, function (_libsGetBmapJs) {}, function (_data_formatter) {
             DataFormatter = _data_formatter.default;
         }],
         execute: function () {
@@ -104,9 +104,9 @@ System.register(['app/plugins/sdk', 'lodash', 'app/core/utils/kbn', './libs/echa
                     value: function onDataReceived(dataList) {
                         this.data = this.panel.IS_UCD ? this.customizeData : dataList;
 
-                        if (this.panel.type == 'map') {
+                        if (this.panel.chartType == 'map') {
                             var data = [];
-                            this.dataFormatter.setGeohashValues(dataList, data);
+                            this.dataFormatter.setGeohashValues(this.data, data);
                             this.data = this.dataFormatter.aggByProvince(data);
                         }
 
